@@ -30,10 +30,10 @@ public class UsuarioDaoImpl implements UsuarioDao {
 
     @Override
     public void excluir(Long id) {
-        Usuario usuario = entityManager.find(Usuario.class, id);
-        entityManager.remove(usuario);
+        entityManager.remove(entityManager.getReference(Usuario.class, id));
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Usuario getId(Long id) {
         return entityManager.find(Usuario.class, id);
@@ -45,6 +45,5 @@ public class UsuarioDaoImpl implements UsuarioDao {
         String jpql = "from Usuario";
         TypedQuery<Usuario> query = entityManager.createQuery(jpql, Usuario.class);
         return query.getResultList();
-        //return entityManager.createQuery(jpql).getResultList();
     }
 }

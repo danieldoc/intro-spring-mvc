@@ -3,7 +3,6 @@ package br.com.devmedia.curso.web.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -27,6 +26,11 @@ public class UsuarioController {
     @Autowired
     private UsuarioDao dao;
 
+    @ModelAttribute("sexos")
+    public TipoSexo[] tipoSexo() {
+        return TipoSexo.values();
+    }
+
     @RequestMapping(value = "/todos", method = RequestMethod.GET)
     public ModelAndView listaTodos(ModelMap model) {
         model.addAttribute("usuarios", dao.getTodos());
@@ -35,7 +39,6 @@ public class UsuarioController {
 
     @GetMapping("/cadastro")
     public String cadastro(@ModelAttribute("usuario") Usuario usuario, ModelMap model) {
-        model.addAttribute("sexos", TipoSexo.values());
         return "/user/add";
     }
 
