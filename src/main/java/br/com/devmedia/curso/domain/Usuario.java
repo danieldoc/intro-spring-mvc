@@ -27,25 +27,26 @@ public class Usuario implements Serializable {
     @Size(min = 3, max = 50, message = "Campo requerido de {min} à {max} caracteres.")
     private String sobrenome;
 
+    @NotBlank
+    @Column(length = 30, nullable = false, unique = true)
+    @Size(min = 3, max = 30, message = "Campo requerido de {min} à {max} caracteres.")
+    private String login;
+
+    @NotBlank
+    @Column(length = 100, nullable = false)
+    private String senha;
+
     @Column(name = "data_nascimento", nullable = false)
     @NotNull(message = "Campo requerido.")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate dtNascimento;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 1)
     @Enumerated(EnumType.STRING)
     private TipoSexo sexo;
 
     public Usuario() {
         super();
-    }
-
-    public Usuario(Long id, String nome, String sobrenome, LocalDate dtNascimento, TipoSexo sexo) {
-        this.id = id;
-        this.nome = nome;
-        this.sobrenome = sobrenome;
-        this.dtNascimento = dtNascimento;
-        this.sexo = sexo;
     }
 
     public Long getId() {
@@ -72,6 +73,22 @@ public class Usuario implements Serializable {
         this.sobrenome = sobrenome;
     }
 
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
     public LocalDate getDtNascimento() {
         return dtNascimento;
     }
@@ -90,24 +107,11 @@ public class Usuario implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (!(o instanceof Usuario))
-            return false;
+        if (this == o) return true;
+        if (!(o instanceof Usuario)) return false;
 
         Usuario usuario = (Usuario) o;
 
         return id.equals(usuario.id);
-    }
-
-    @Override
-    public String toString() {
-        return "Usuario{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", sobrenome='" + sobrenome + '\'' +
-                ", dtNascimento=" + dtNascimento +
-                ", sexo=" + sexo +
-                '}';
     }
 }

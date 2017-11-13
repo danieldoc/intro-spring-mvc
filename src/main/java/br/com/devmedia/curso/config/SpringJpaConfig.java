@@ -49,6 +49,7 @@ public class SpringJpaConfig {
 
     private Properties jpaProperties() {
         Properties props = new Properties();
+        props.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQL9Dialect");
         props.setProperty("hibernate.show_sql", "true");
         props.setProperty("hibernate.format_sql", "true");
         props.setProperty("hibernate.hbm2ddl.auto", "update");

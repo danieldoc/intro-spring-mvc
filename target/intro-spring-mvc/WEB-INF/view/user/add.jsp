@@ -55,6 +55,16 @@
                         <form:errors path="dtNascimento" cssClass="label label-danger"/>
                     </div>
                     <div class="form-group">
+                        <label for="login">Login: </label>
+                        <form:input path="login"  class="form-control"/>
+                        <form:errors path="login" cssClass="label label-danger"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="senha">Senha: </label>
+                        <form:input type="password" path="senha"  class="form-control"/>
+                        <form:errors path="senha" cssClass="label label-danger"/>
+                    </div>
+                    <div class="form-group">
                         <button type="submit" class="btn btn-primary">Confirmar</button>
                     </div>
                 </form:form>

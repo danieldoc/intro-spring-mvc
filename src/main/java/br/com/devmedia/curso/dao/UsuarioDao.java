@@ -14,5 +14,7 @@ public interface UsuarioDao {
 
     Usuario getId(Long id);
 
+    Usuario findByLogin(String username);
+
     List<Usuario> getTodos();
 }
