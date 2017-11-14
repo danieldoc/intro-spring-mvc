@@ -13,7 +13,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Devmedia Sistemas</title>
+        <title>Sistema Spring</title>
         <spring:url value="/static/css/bootstrap.min.css" var="bootstrapmincss"/>
         <link rel='stylesheet prefetch' href='${bootstrapmincss}'>
         <spring:url value="/static/css/style.css" var="stylecss"/>
@@ -21,15 +21,11 @@
     </head>
     <body>
         <div class="wrapper">
-            <spring:url value="/login" var="login"/>
-            <!--<form class="form-signin" action="${login}" method="post">-->
             <form class="form-signin" th:action="@{/login}" method="post">
-                <h2 class="form-signin-heading">TARW Sistemas</h2>
+                <h2 class="form-signin-heading">Sistema Spring</h2>
                 <input type="text" class="form-control" name="username" placeholder="Usuário" required="" autofocus="" />
                 <input type="password" class="form-control" name="password" placeholder="Senha" required=""/>
-                <label>
-                    ${msg}
-                </label>
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
             </form>
         </div>

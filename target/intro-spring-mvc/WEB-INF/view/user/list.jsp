@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="th" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -24,10 +25,13 @@
         <div class="container">
             <h1>Lista de Usuários</h1>
             <hr>
-            <div>
+
+            <div class="row">
                 <spring:url value="/usuario/cadastro" var="cadastro"/>
                 <a class="btn btn-default" href="${cadastro}">Novo Usuário</a>
+                <a class="btn btn-default" href="<c:url value="/logout" />"><span class="glyphicon glyphicon-log-out"></span> Sair</a>
             </div>
+
             <hr>
 
             <div class="panel-default">
