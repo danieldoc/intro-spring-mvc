@@ -29,7 +29,8 @@
             <div class="row">
                 <spring:url value="/usuario/cadastro" var="cadastro"/>
                 <a class="btn btn-default" href="${cadastro}">Novo Usuário</a>
-                <a class="btn btn-default" href="<c:url value="/logout" />"><span class="glyphicon glyphicon-log-out"></span> Sair</a>
+                <spring:url value="/logout" var="logout"/>
+                <a class="btn btn-default" href="${logout}"><span class="glyphicon glyphicon-log-out"></span> Sair</a>
             </div>
 
             <hr>

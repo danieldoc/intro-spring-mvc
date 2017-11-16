@@ -5,8 +5,11 @@ import java.util.Properties;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -16,15 +19,19 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
+@PropertySource(value = { "classpath:application.properties" })
 public class SpringJpaConfig {
+
+    @Autowired
+    Environment environment;
 
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource ds = new DriverManagerDataSource();
-        ds.setDriverClassName("org.postgresql.Driver");
-        ds.setUrl("jdbc:postgresql://localhost:5432/test?createDatabaseIfNotExist=true");
-        ds.setUsername("postgres");
-        ds.setPassword("postgres");
+        ds.setDriverClassName(environment.getRequiredProperty("jdbc.driverClassName"));
+        ds.setUrl(environment.getRequiredProperty("jdbc.url"));
+        ds.setUsername(environment.getRequiredProperty("jdbc.username"));
+        ds.setPassword(environment.getRequiredProperty("jdbc.password"));
         return ds;
     }
 
@@ -49,10 +56,10 @@ public class SpringJpaConfig {
 
     private Properties jpaProperties() {
         Properties props = new Properties();
-        props.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQL9Dialect");
-        props.setProperty("hibernate.show_sql", "true");
-        props.setProperty("hibernate.format_sql", "true");
-        props.setProperty("hibernate.hbm2ddl.auto", "update");
+        props.setProperty("hibernate.dialect", environment.getRequiredProperty("hibernate.dialect"));
+        props.setProperty("hibernate.show_sql", environment.getRequiredProperty("hibernate.show_sql"));
+        props.setProperty("hibernate.format_sql", environment.getRequiredProperty("hibernate.format_sql"));
+        props.setProperty("hibernate.hbm2ddl.auto", environment.getRequiredProperty("hibernate.hbm2ddl.auto"));
         return props;
     }
 }

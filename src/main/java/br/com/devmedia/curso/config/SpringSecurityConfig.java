@@ -2,15 +2,17 @@ package br.com.devmedia.curso.config;
 
 import br.com.devmedia.curso.security.DevmediaUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.session.HttpSessionEventPublisher;
 
-@EnableWebSecurity
 @Configuration
+@EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -24,11 +26,12 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login")
-                .permitAll()
+                .loginPage("/login").permitAll()
                 .and()
                 .logout()
-                .logoutUrl("/logout");
+                .logoutUrl("/logout")
+                .and()
+                .sessionManagement().maximumSessions(1);
     }
 
     @Override
@@ -36,5 +39,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         builder.userDetailsService(ssUserDetailsService).passwordEncoder(new BCryptPasswordEncoder());
     }
 
-
+    @Bean
+    public HttpSessionEventPublisher httpSessionEventPublisher() {
+        return new HttpSessionEventPublisher();
+    }
 }
