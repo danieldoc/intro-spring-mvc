@@ -5,13 +5,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Controller
-public class FrontController {
+public class HomeController {
 
     @GetMapping(value = "/")
     public String welcome() {
@@ -23,19 +22,12 @@ public class FrontController {
         return "login";
     }
 
-//    @GetMapping(value = "/logout")
-//    public ModelAndView logout() {
-//        ModelAndView view = new ModelAndView("login");
-//        view.addObject("msg", "Saiu com sucesso!");
-//        return view;
+//    @GetMapping(value="/logout")
+//    public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        if (auth != null){
+//            new SecurityContextLogoutHandler().logout(request, response, auth);
+//        }
+//        return "redirect:/login?logout=true";
 //    }
-
-    @GetMapping(value="/logout")
-    public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null){
-            new SecurityContextLogoutHandler().logout(request, response, auth);
-        }
-        return "redirect:/login?logout";
-    }
 }

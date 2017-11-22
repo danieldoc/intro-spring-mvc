@@ -1,7 +1,8 @@
-package br.com.devmedia.curso.security;
+package br.com.devmedia.curso.service;
 
 import br.com.devmedia.curso.dao.UsuarioDao;
 import br.com.devmedia.curso.domain.Usuario;
+import br.com.devmedia.curso.security.UsuarioSistema;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

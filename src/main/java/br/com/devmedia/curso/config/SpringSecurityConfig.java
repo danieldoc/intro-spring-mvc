@@ -1,6 +1,6 @@
 package br.com.devmedia.curso.config;
 
-import br.com.devmedia.curso.security.DevmediaUserDetailsService;
+import br.com.devmedia.curso.service.DevmediaUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,17 +20,22 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
+        http.authorizeRequests()
                 .antMatchers("/static/**").permitAll()
                 .anyRequest().authenticated()
-                .and()
+        .and()
                 .formLogin()
-                .loginPage("/login").permitAll()
-                .and()
+                .loginPage("/login")
+//                .failureForwardUrl("/login?error=true")
+                .permitAll()
+        .and()
                 .logout()
-                .logoutUrl("/logout")
-                .and()
+//                .logoutSuccessUrl("/login?logout=true")
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID")
+        .and()
+                .exceptionHandling().accessDeniedPage("/denied")
+        .and()
                 .sessionManagement().maximumSessions(1);
     }
 

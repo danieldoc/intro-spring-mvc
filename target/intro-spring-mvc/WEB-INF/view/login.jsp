@@ -1,6 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="th" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: daniel
@@ -21,7 +20,7 @@
     </head>
     <body>
         <div class="wrapper">
-            <form class="form-signin" th:action="@{/login}" method="post">
+            <form class="form-signin" action="<spring:url value="${'/login'}"/>" method="post">
                 <h2 class="form-signin-heading">Sistema Spring</h2>
                 <input type="text" class="form-control" name="username" placeholder="Usuário" required="" autofocus="" />
                 <input type="password" class="form-control" name="password" placeholder="Senha" required=""/>
