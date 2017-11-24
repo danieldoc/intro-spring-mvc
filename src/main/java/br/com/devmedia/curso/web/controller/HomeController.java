@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 public class HomeController {
 
     @GetMapping(value = "/")
-    public String welcome() {
+    public String index() {
         return "redirect:/usuario/todos";
     }
 
@@ -21,13 +21,4 @@ public class HomeController {
     public String login() {
         return "login";
     }
-
-//    @GetMapping(value="/logout")
-//    public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
-//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//        if (auth != null){
-//            new SecurityContextLogoutHandler().logout(request, response, auth);
-//        }
-//        return "redirect:/login?logout=true";
-//    }
 }

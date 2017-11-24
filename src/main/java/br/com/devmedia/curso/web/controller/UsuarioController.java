@@ -2,6 +2,7 @@ package br.com.devmedia.curso.web.controller;
 
 import javax.validation.Valid;
 
+import br.com.devmedia.curso.security.UsuarioOnline;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -25,6 +26,8 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioDao dao;
+
+    private UsuarioOnline usuarioOnline;
 
     @ModelAttribute("sexos")
     public TipoSexo[] tipoSexo() {

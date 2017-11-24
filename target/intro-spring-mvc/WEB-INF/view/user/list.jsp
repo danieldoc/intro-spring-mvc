@@ -3,6 +3,7 @@
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="th" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -27,10 +28,16 @@
             <hr>
 
             <div class="row">
+
                 <spring:url value="/usuario/cadastro" var="cadastro"/>
+                <security:authorize access="hasAnyAuthority('ROLE_ADMIN')">
                 <a class="btn btn-default" href="${cadastro}">Novo Usuário</a>
+                </security:authorize>
                 <spring:url value="/logout" var="logout"/>
-                <a class="btn btn-default" href="${logout}"><span class="glyphicon glyphicon-log-out"></span> Sair</a>
+                <form action="<spring:url value="/logout"/>" method="post">
+                    <security:csrfInput/>
+                    <button class="btn btn-default" type="submit">Sair</button>
+                </form>
             </div>
 
             <hr>
@@ -39,6 +46,10 @@
 
                 <div class="panel-heading">
                     <span>${message == null ? '&nbsp;' : message}</span>
+                </div>
+
+                <div>
+                    <span>Usuário: ${usuarioOnline.username}</span>
                 </div>
 
                 <table class="table table-striped table-condensed">

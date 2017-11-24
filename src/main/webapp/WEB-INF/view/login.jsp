@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: daniel
@@ -24,7 +25,7 @@
                 <h2 class="form-signin-heading">Sistema Spring</h2>
                 <input type="text" class="form-control" name="username" placeholder="Usuário" required="" autofocus="" />
                 <input type="password" class="form-control" name="password" placeholder="Senha" required=""/>
-                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                <security:csrfInput/>
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
             </form>
         </div>
